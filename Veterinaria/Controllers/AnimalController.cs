@@ -44,7 +44,7 @@ namespace Veterinaria.Controllers
             {
                 animalToEdit.Name = animal.Name;
                 animalToEdit.OwnerName = animal.OwnerName;
-                animalToEdit.Born = animal.Born;
+                animalToEdit.BornDate = animal.BornDate;
                 _animalRepository.UpdateAnimal(animalToEdit);
                 return NoContent();
             }

@@ -9,33 +9,39 @@ namespace Veterinaria.Repository
 
         public AnimalRepository(MyDbContext dbContext)
         {
-           // _dbContext = dbContext.Animals;
+            _dbContext = dbContext;
         }
 
         public IEnumerable<Animal> GetAllAnimals()
         {
-            throw new NotImplementedException();
+            return _dbContext.Animals.ToList();
         }
 
         public Animal GetAnimalById(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Animals.FirstOrDefault(x => x.Id == id);
         }
 
 
         public void AddAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            _dbContext.Animals.Add(animal);
+            _dbContext.SaveChanges();
         }
 
                
         public void UpdateAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            _dbContext.Animals.Update(animal);
         }
         public void DeleteAnimal(int id)
         {
-            throw new NotImplementedException();
+            var animal = _dbContext.Animals.FirstOrDefault(x => x.Id ==id);
+            if (animal != null)
+            {
+                _dbContext.Animals.Remove(animal);
+                _dbContext.SaveChanges();   
+            }
         }
 
     }

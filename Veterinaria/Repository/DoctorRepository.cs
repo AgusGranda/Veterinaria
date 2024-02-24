@@ -18,29 +18,37 @@ namespace Veterinaria.Repository
 
         public IEnumerable<Doctor> GetAllDoctors()
         {
-            throw new NotImplementedException();
+            return _dbContext.Doctors.ToList();
         }
 
         public Doctor GetDoctorById(int id)
         {
-            throw new NotImplementedException();
+
+            return _dbContext.Doctors.FirstOrDefault(p => p.Id == id);
         }
 
         public void AddDoctor(Doctor doctor)
         {
-            throw new NotImplementedException();
+            _dbContext.Doctors.Add(doctor);
+            _dbContext.SaveChanges();
         }
 
-                   
+
 
         public void UpdaterDoctor(Doctor doctor)
         {
-            throw new NotImplementedException();
+            _dbContext.Doctors.Update(doctor);
+            _dbContext.SaveChanges();
         }
 
         public void DeleteDoctor(int id)
         {
-            throw new NotImplementedException();
+            var doctor = _dbContext.Doctors.FirstOrDefault(p => p.Id == id);
+            if (doctor != null)
+            {
+                _dbContext.Doctors.Remove(doctor);
+                _dbContext.SaveChanges();
+            }
         }
 
 

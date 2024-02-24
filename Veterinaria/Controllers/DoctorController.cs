@@ -28,7 +28,12 @@ namespace Veterinaria.Controllers
         public IActionResult GetOneDoctor(int id)
         {
             var doctor = _doctorRepository.GetDoctorById(id);
-            return Ok(doctor);
+            if (doctor != null)
+            {
+                return Ok(doctor);
+
+            }
+            return NotFound();
         }
 
         [HttpPost]
@@ -36,11 +41,11 @@ namespace Veterinaria.Controllers
         {
             _doctorRepository.AddDoctor(doctor);
 
-            return CreatedAtAction(nameof(GetOneDoctor), new {Id = doctor.Id}, doctor);
+            return CreatedAtAction(nameof(GetOneDoctor), new { Id = doctor.Id }, doctor);
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutDoctor(Doctor doctor, int id) 
+        public IActionResult PutDoctor(Doctor doctor, int id)
         {
             var doctorToEdit = _doctorRepository.GetDoctorById(id);
             if (doctorToEdit != null)
@@ -51,18 +56,18 @@ namespace Veterinaria.Controllers
 
                 return NoContent();
             }
-            
+
             return NotFound();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteDoctor(int id) 
+        public IActionResult DeleteDoctor(int id)
         {
             var doctor = _doctorRepository.GetDoctorById(id);
             if (doctor != null)
             {
                 _doctorRepository.DeleteDoctor(id);
-                return NoContent(); 
+                return NoContent();
             }
             return NotFound();
         }

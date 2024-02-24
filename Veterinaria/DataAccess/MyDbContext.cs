@@ -10,7 +10,7 @@ namespace Veterinaria.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("");
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-76KGP02\\SQLEXPRESS;Initial Catalog=Veterinaria_DB;Persist Security Info = True;Trusted_Connection = SSPI;MultipleActiveResultSets=True; Trust Server Certificate= True");
         }
 
     }
