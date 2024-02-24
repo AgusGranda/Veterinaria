@@ -9,10 +9,8 @@ namespace Veterinaria.Repository
 
         public AnimalRepository(MyDbContext dbContext)
         {
-            _dbContext = dbContext;
+           // _dbContext = dbContext.Animals;
         }
-
-
 
         public IEnumerable<Animal> GetAllAnimals()
         {
