@@ -16,6 +16,7 @@ builder.Services.AddDbContext<MyDbContext>();
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IAnimalRepository, AnimalRepository>();
 
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
