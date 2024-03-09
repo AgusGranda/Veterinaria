@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Veterinaria.Models;
+using Veterinaria.Repository;
 
 namespace Veterinaria.Controllers
 {

@@ -1,6 +1,8 @@
 ﻿using System.Net.Sockets;
 using Microsoft.AspNetCore.Mvc;
 using Veterinaria.Models;
+using Veterinaria.Repository;
+using Veterinaria.Services;
 
 namespace Veterinaria.Controllers
 {
@@ -9,67 +11,43 @@ namespace Veterinaria.Controllers
     [Route("api/[controller]")]
     public class DoctorController : ControllerBase
     {
-        private readonly IDoctorRepository _doctorRepository;
+        private readonly IDoctorService _doctorService;
 
-        public DoctorController(IDoctorRepository doctorRepository)
+        public DoctorController(IDoctorService doctorService)
         {
-            _doctorRepository = doctorRepository;
+            _doctorService = doctorService;
         }
 
         [HttpGet]
         public IActionResult GetAllDoctors()
         {
-            var doctors = _doctorRepository.GetAllDoctors();
-            return Ok(doctors);
+            throw new NotImplementedException();
         }
 
 
         [HttpGet("{id}")]
         public IActionResult GetOneDoctor(int id)
         {
-            var doctor = _doctorRepository.GetDoctorById(id);
-            if (doctor != null)
-            {
-                return Ok(doctor);
-
-            }
-            return NotFound();
+            throw new NotImplementedException();
         }
 
         [HttpPost]
         public IActionResult PostDoctor(Doctor doctor)
         {
-            _doctorRepository.AddDoctor(doctor);
-
-            return CreatedAtAction(nameof(GetOneDoctor), new { Id = doctor.Id }, doctor);
+            throw new NotImplementedException();
         }
 
         [HttpPut("{id}")]
         public IActionResult PutDoctor(Doctor doctor, int id)
         {
-            var doctorToEdit = _doctorRepository.GetDoctorById(id);
-            if (doctorToEdit != null)
-            {
-                doctorToEdit.Name = doctor.Name;
-                doctorToEdit.WorkingTime = doctor.WorkingTime;
-                _doctorRepository.UpdaterDoctor(doctorToEdit);
-
-                return NoContent();
-            }
-
-            return NotFound();
+            throw new NotImplementedException();
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteDoctor(int id)
         {
-            var doctor = _doctorRepository.GetDoctorById(id);
-            if (doctor != null)
-            {
-                _doctorRepository.DeleteDoctor(id);
-                return NoContent();
-            }
-            return NotFound();
+            throw new NotImplementedException();
+
         }
 
     }

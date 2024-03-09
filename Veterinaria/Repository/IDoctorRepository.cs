@@ -1,4 +1,6 @@
-﻿namespace Veterinaria.Models
+﻿using Veterinaria.Models;
+
+namespace Veterinaria.Repository
 {
     public interface IDoctorRepository
     {

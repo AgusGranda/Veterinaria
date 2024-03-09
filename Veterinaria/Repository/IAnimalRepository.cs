@@ -1,4 +1,6 @@
-﻿namespace Veterinaria.Models
+﻿using Veterinaria.Models;
+
+namespace Veterinaria.Repository
 {
     public interface IAnimalRepository
     {
@@ -6,6 +8,6 @@
         Animal GetAnimalById(int id);
         void AddAnimal(Animal animal);
         void UpdateAnimal(Animal animal);
-        void DeleteAnimal(int id);  
+        void DeleteAnimal(int id);
     }
 }
