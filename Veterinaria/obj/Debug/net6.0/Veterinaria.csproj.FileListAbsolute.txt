@@ -67,3 +67,4 @@ F:\Programacion\C#\Alkemy\Proyectos\Veterinaria\Veterinaria\obj\Debug\net6.0\ref
 F:\Programacion\C#\Alkemy\Proyectos\Veterinaria\Veterinaria\obj\Debug\net6.0\Veterinaria.pdb
 F:\Programacion\C#\Alkemy\Proyectos\Veterinaria\Veterinaria\obj\Debug\net6.0\Veterinaria.genruntimeconfig.cache
 F:\Programacion\C#\Alkemy\Proyectos\Veterinaria\Veterinaria\obj\Debug\net6.0\ref\Veterinaria.dll
+F:\Programacion\C#\Alkemy\Proyectos\Veterinaria\Veterinaria\bin\Debug\net6.0\AutoMapper.dll

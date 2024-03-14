@@ -4,10 +4,10 @@ namespace Veterinaria.Repository
 {
     public interface IAnimalRepository
     {
-        IEnumerable<Animal> GetAllAnimals();
-        Animal GetAnimalById(int id);
-        void AddAnimal(Animal animal);
-        void UpdateAnimal(Animal animal);
-        void DeleteAnimal(int id);
+        Task<IEnumerable<Animal>> GetAllAnimals();
+        Task<Animal> GetAnimalById(int id);
+        Task AddAnimal(Animal animal);
+        Task UpdateAnimal(Animal animal);
+        Task DeleteAnimal(int id);
     }
 }

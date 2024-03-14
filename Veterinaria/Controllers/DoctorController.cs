@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Veterinaria.Models;
 using Veterinaria.Repository;
-using Veterinaria.Services;
 
 namespace Veterinaria.Controllers
 {
@@ -11,43 +10,63 @@ namespace Veterinaria.Controllers
     [Route("api/[controller]")]
     public class DoctorController : ControllerBase
     {
-        private readonly IDoctorService _doctorService;
+        private readonly IDoctorRepository _doctorRepository;
 
-        public DoctorController(IDoctorService doctorService)
+        public DoctorController(IDoctorRepository doctorRepository)
         {
-            _doctorService = doctorService;
+            _doctorRepository = doctorRepository;
         }
 
         [HttpGet]
-        public IActionResult GetAllDoctors()
+        public async Task<IActionResult> GetAllDoctors()
         {
-            throw new NotImplementedException();
+            var doctors = await _doctorRepository.GetAllDoctors();
+            return Ok(doctors);
         }
 
 
         [HttpGet("{id}")]
-        public IActionResult GetOneDoctor(int id)
+        public async Task<IActionResult> GetOneDoctor(int id)
         {
-            throw new NotImplementedException();
+            var animal = await _doctorRepository.GetDoctorById(id);
+            if (animal != null)
+            {
+                return Ok(animal);
+            }
+            return NotFound();
         }
 
         [HttpPost]
-        public IActionResult PostDoctor(Doctor doctor)
+        public async Task<IActionResult> PostDoctor(Doctor doctor)
         {
-            throw new NotImplementedException();
+            await _doctorRepository.AddDoctor(doctor);
+            return CreatedAtAction(nameof(GetOneDoctor), new { id = doctor.Id }, doctor);
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutDoctor(Doctor doctor, int id)
+        public async Task<IActionResult> PutDoctor(Doctor doctor, int id)
         {
-            throw new NotImplementedException();
+            var doctorSelected = await _doctorRepository.GetDoctorById(id);
+            if (doctorSelected != null)
+            {
+                doctorSelected.Name = doctor.Name;
+                doctorSelected.WorkingTime = doctor.WorkingTime;
+                await _doctorRepository.UpdaterDoctor(doctorSelected);
+                return NoContent();
+            }
+            return NotFound();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteDoctor(int id)
+        public async Task<IActionResult> DeleteDoctor(int id)
         {
-            throw new NotImplementedException();
-
+           var doctorSelected = await _doctorRepository.GetDoctorById(id);
+            if(doctorSelected != null)
+            {
+                await _doctorRepository.DeleteDoctor(id);
+                return NoContent();
+            }
+            return NotFound();
         }
 
     }

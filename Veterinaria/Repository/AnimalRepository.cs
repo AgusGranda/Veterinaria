@@ -1,5 +1,6 @@
 ﻿using Veterinaria.DataAccess;
 using Veterinaria.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Veterinaria.Repository
 {
@@ -12,35 +13,37 @@ namespace Veterinaria.Repository
             _dbContext = dbContext;
         }
 
-        public IEnumerable<Animal> GetAllAnimals()
+        public async Task<IEnumerable<Animal>> GetAllAnimals()
         {
-            return _dbContext.Animals.ToList();
+            return await _dbContext.Animals.ToListAsync();
         }
 
-        public Animal GetAnimalById(int id)
+        public async Task<Animal> GetAnimalById(int id)
         {
-            return _dbContext.Animals.FirstOrDefault(x => x.Id == id);
+           return await _dbContext.Animals.FirstOrDefaultAsync(x => x.Id == id);
+            
         }
 
 
-        public void AddAnimal(Animal animal)
+        public async Task AddAnimal(Animal animal)
         {
             _dbContext.Animals.Add(animal);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
-               
-        public void UpdateAnimal(Animal animal)
+
+        public async Task UpdateAnimal(Animal animal)
         {
             _dbContext.Animals.Update(animal);
+            await _dbContext.SaveChangesAsync();
         }
-        public void DeleteAnimal(int id)
+        public async Task DeleteAnimal(int id)
         {
-            var animal = _dbContext.Animals.FirstOrDefault(x => x.Id ==id);
+            var animal = _dbContext.Animals.FirstOrDefault(x => x.Id == id);
             if (animal != null)
             {
                 _dbContext.Animals.Remove(animal);
-                _dbContext.SaveChanges();   
+                await _dbContext.SaveChangesAsync();
             }
         }
 

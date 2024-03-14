@@ -17,49 +17,53 @@ namespace Veterinaria.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllAnimals() 
+        public async Task<IActionResult> GetAllAnimals()
         {
-            var animalList = _animalRepository.GetAllAnimals();
-            return Ok(animalList);
+            var animals = await _animalRepository.GetAllAnimals();
+            return Ok(animals);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetOneAnimal(int id)
+        public async Task<IActionResult> GetOneAnimal(int id)
         {
-            var animal = _animalRepository.GetAnimalById(id);
-            return Ok(animal);
+            var animal = await _animalRepository.GetAnimalById(id);
+            if (animal != null)
+            {
+                return Ok(animal);
+            }
+            return NotFound();
         }
 
         [HttpPost]
-        public IActionResult PostAnimal(Animal animal) 
+        public async Task<IActionResult> PostAnimal(Animal animal)
         {
-            _animalRepository.AddAnimal(animal);
+            await _animalRepository.AddAnimal(animal);
             return CreatedAtAction(nameof(GetOneAnimal), new { id = animal.Id }, animal);
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateAnimal(Animal animal , int id)
+        public async Task<IActionResult> UpdateAnimal(Animal animal, int id)
         {
-            var animalToEdit = _animalRepository.GetAnimalById(id);
-            if(animalToEdit != null)
+            var animalToEdit = await _animalRepository.GetAnimalById(id);
+            if (animalToEdit != null)
             {
                 animalToEdit.Name = animal.Name;
                 animalToEdit.OwnerName = animal.OwnerName;
                 animalToEdit.BornDate = animal.BornDate;
-                _animalRepository.UpdateAnimal(animalToEdit);
-                return NoContent();
+                 await _animalRepository.UpdateAnimal(animalToEdit);
+                
             }
             return NotFound();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteAnimal(int id)
+        public async Task<IActionResult> DeleteAnimal(int id)
         {
-            var animal = _animalRepository.GetAnimalById(id);
+            var animal =  await _animalRepository.GetAnimalById(id);
             if (animal != null)
             {
-                _animalRepository.DeleteAnimal(id);
-                return NoContent(); 
+                await _animalRepository.DeleteAnimal(id);
+                return NoContent();
             }
             return NotFound();
         }
